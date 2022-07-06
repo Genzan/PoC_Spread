@@ -1,7 +1,7 @@
 const Web3 = require("web3");
 const PROVIDER = "http://169.57.44.49:8545";
 const ABICODE = require('../contracts/abi/POC.json');
-const CONTRACT_ADDRESS = "0x2101CafA09ADA5DfD96B8d579D70F124bE74a488";
+const CONTRACT_ADDRESS = "0xD099CB21EdbF69528A8280abB1C6D11c5012e2A4";
 
 const web3 = new Web3(
     new Web3.providers.HttpProvider(PROVIDER)
@@ -25,7 +25,7 @@ class POC {
             false,
         );
         let response = await web3.eth.sendSignedTransaction(signedTx.rawTransaction).catch((err) => {
-            console.error("ERR",err);
+            console.error("ERR_11",err);
         });
         const blockNumber = response.blockNumber;
         let response2 = await contract.getPastEvents("SearchAdded", { fromBlock: blockNumber, toBlock: blockNumber });
@@ -38,8 +38,17 @@ class POC {
                 }
             }
         }
-        console.log("</addBusqueda>");
-        return result;
+        let count = 0;
+        setInterval(async function(){
+            let isReady = await contract.methods.isOpen(_uuid).call();
+            console.log('loop '+count+":",isReady);
+            count++;
+            if (!isReady) {
+                console.log("</addBusqueda>");
+                return result;
+            }
+        }, 5000);
+        
     };
 
     addResultado = async(_address, _privateKey, _uuid, _found, _cid) => {

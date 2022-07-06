@@ -54,7 +54,7 @@ contract POC {
   }
   
   function newSearch(string memory _uuid, string memory _curp, string memory _cid) external {
-    if(bytes(Searches[_uuid].curp).length == 0) {
+    if(bytes(Searches[_uuid].curp).length != 0) {
       revert SearchAlreadyExistError(_uuid);
     }
     Searches[_uuid].curp = _curp;
@@ -69,6 +69,7 @@ contract POC {
     if(bytes(Searches[_uuid].curp).length != 0) {
       revert SearchDontExistError(_uuid);
     }
+    // This participant already voted
     Searches[_uuid].Responses.push(Response(msg.sender, _found, _cid));
     checkforClose(_uuid);
     emit ResultAdded(_uuid, msg.sender);

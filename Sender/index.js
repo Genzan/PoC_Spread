@@ -28,7 +28,7 @@ app.post('/dev/nueva_busqueda', async (req, res) => {
   for await (const item of object) {
     cid = item;
     break;
-  } 
+  }
   let response = await POCObj.addBusqueda(
     req.body._address, req.body._privateKey, req.body._uuid, req.body._curp, cid.path);
   res.status(200).send(response);
