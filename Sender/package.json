@@ -1,0 +1,25 @@
+{
+  "name": "PoC_Spread",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "truffle test --network test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
+    "@truffle/hdwallet-provider": "^2.0.8",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "ipfs-http-client": "^42.0.0",
+    "ngrok": "^4.3.1",
+    "properties-reader": "^2.2.0",
+    "truffle-assertions": "^0.9.2",
+    "web3": "^1.7.3"
+  }
+}
