@@ -46,6 +46,7 @@ class POC {
             if (!isReady) {
                 console.log("</addBusqueda>");
                 return result;
+                // Añadir aqui que se corte despues de ciertos minutos
             }
         }, 5000);
         
