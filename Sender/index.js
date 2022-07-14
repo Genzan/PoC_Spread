@@ -48,17 +48,17 @@ app.post('/dev/nuevo_resultado', async (req, res) => {
 });
 
 app.get('/dev/cid_busqueda', async (req, res) => {
-  let response = await compObj.getSearchCID(req.body._uuid);
+  let response = await POCObj.getSearchCID(req.body._uuid);
   res.status(200).send(response);
 });
 
 app.get('/dev/obtener_resultados', async (req, res) => {
-  let response = await compObj.getResults(req.body._uuid);
+  let response = await POCObj.getResults(req.body._uuid);
   res.status(200).send(response);
 });
 
 app.get('/dev/estatus_busqueda', async (req, res) => {
-  let response = await compObj.isOpen(req.body._uuid);
+  let response = await POCObj.isOpen(req.body._uuid);
   res.status(200).send(response);
 });
 
