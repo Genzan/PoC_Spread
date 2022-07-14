@@ -14,6 +14,7 @@ contract POC {
 
   //Errors
   error SearchAlreadyExistError(string _uuid);
+  error SearchDontExistError(string _uuid);
   error SearchIsClosedError(string uuid);
 
   //Structs used
@@ -79,9 +80,9 @@ contract POC {
   }
 
   function getSearchCID(string memory _uuid) external view returns (string memory) {
-    if(!searchIsOpen(_uuid)) {
+    /*if(!searchIsOpen(_uuid)) {
       revert SearchIsClosedError(_uuid);
-    }
+    }*/
     return Searches[_uuid].cid;
   }
 
