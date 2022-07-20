@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const ipfsClient = require('ipfs-http-client');
 // Carga de Librerias Internas
-const POC = require('./tools/POC.js');
+const POC = require('./tools/POC_oracle.js');
 
 const SERVERPORT = "8010";
 
@@ -20,6 +20,7 @@ var rawBodyHandler = function (req, res, buf, encoding) {
 app.use(cors({ allowedHeaders: 'Content-Type, Cache-Control' }));
 app.options('*', cors());
 app.use(bodyParser.json({ verify: rawBodyHandler }));
+
 
 app.post('/dev/escuchando', async (req, res) => {
   let response = await POCObj.listedForSearchs();
