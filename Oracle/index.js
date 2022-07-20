@@ -2,13 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const ipfsClient = require('ipfs-http-client');
 // Carga de Librerias Internas
-const POC = require('./tools/POC_oracle.js');
+const Oracle = require('./tools/POC_oracle.js');
 
 const SERVERPORT = "8010";
 
-const POCObj = new POC();
+const OracleObj = new Oracle();
 const app = express();
 
 var rawBodyHandler = function (req, res, buf, encoding) {
@@ -21,13 +20,13 @@ app.use(cors({ allowedHeaders: 'Content-Type, Cache-Control' }));
 app.options('*', cors());
 app.use(bodyParser.json({ verify: rawBodyHandler }));
 
-
+/*
 app.post('/dev/escuchando', async (req, res) => {
-  let response = await POCObj.listedForSearchs();
+  let response = await OracleObj.listedForSearchs();
   res.status(200).send(response);
 });
-
+*/
 // run the app server and tunneling service
-app.listen(SERVERPORT, () => {
-  console.log(`Demo listening at http://localhost:${SERVERPORT}`)
+app.listen(SERVERPORT, async () => {
+  await OracleObj.listedForSearchs();
 });
