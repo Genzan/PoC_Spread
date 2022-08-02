@@ -4,8 +4,14 @@ const ABICODE = require('../contracts/abi/POC.json');
 
 const PROVIDER = "http://169.57.44.49:8545";
 
+const ADDRESS = "0x27883702D76c032959426500E469092eaE9d7f39";
+
+const PRIVATE_KEY = "fe79e7da8573c66cfc45b8b00b613e78c19f4b7ffe8fda4db05376fa445ecf32";
+
 module.exports = { 
     CONTRACT_ADDRESS,
     ABICODE,
-    PROVIDER
+    PROVIDER,
+    ADDRESS,
+    PRIVATE_KEY
 };
