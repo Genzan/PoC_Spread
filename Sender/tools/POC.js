@@ -1,4 +1,6 @@
 const Web3 = require("web3");
+const ipfsClient = require('ipfs-http-client');
+
 const { CONTRACT_ADDRESS, ABICODE, PROVIDER } = require('../resources/env');
 
 const web3 = new Web3(
@@ -50,37 +52,6 @@ class POC {
         
     };
 
-    addResultado = async(_address, _privateKey, _uuid, _found, _cid) => {
-        console.log("<addResultado>");
-        let result = false;
-        let encodedABI = contract.methods.newResult(_uuid, _found, _cid).encodeABI();
-        let signedTx = await web3.eth.accounts.signTransaction(
-            {
-              data: encodedABI,
-              from: _address,
-              gas: 2000000,
-              to: CONTRACT_ADDRESS,
-            },
-            _privateKey,
-            false,
-        );
-        let response = await web3.eth.sendSignedTransaction(signedTx.rawTransaction).catch((err) => {
-            console.error("ERR",err);
-        });
-        const blockNumber = response.blockNumber;
-        let response2 = await contract.getPastEvents("ResultAdded", { fromBlock: blockNumber, toBlock: blockNumber });
-        for(var i=0; i < response2.length; i++){
-            if(response2[i].transactionHash === response.transactionHash) {
-                result = {
-                    "uuid": response2[i].returnValues._uuid,
-                    "node": response2[i].returnValues._node,
-                }
-            }
-        }
-        console.log("</addResultado>");
-        return result;
-    };
-
     getSearchCID = async(_uuid) => {
         console.log("<getSearchCID>");
         let response = await contract.methods.getSearchCID(_uuid).call();
@@ -91,6 +62,19 @@ class POC {
     getResults = async(_uuid) => {
         console.log("<getResults>");
         let response = await contract.methods.getResults(_uuid).call();
+        console.log("XX: ",response[0].cid);
+        //agregar aqui validacion de que no entre si no hay resultados
+        const ipfs = new ipfsClient({ host: 'ipfs.infura.io', port: 5001,protocol: 'https' });
+        //agregar aqui ciclo que recorra todos los resultados y ademas crear variable q guarde las distancias
+        const file = [];
+        for await (const item of ipfs.cat(response[0].cid)) {
+            console.log("GG",item);
+            file.push(item);
+            break;
+        }
+        const raw = Buffer.concat(file).toString();
+        console.log("YY: ",JSON.parse(raw));
+        // Sacar aqui el promedio.
         console.log("</getResults>");
         return response;
     };

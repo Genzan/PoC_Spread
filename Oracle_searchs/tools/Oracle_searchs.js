@@ -12,15 +12,15 @@ const web3 = new Web3(
 );
 const contract = new web3.eth.Contract(ABICODE,CONTRACT_ADDRESS);
 
-class POC_oracle {
+class Oracle_searchs {
 
-    listedForSearchs = async() => {
+    listenForSearchs = async() => {
         console.log("Escuchando nuevas solicitudes...");
         setInterval(async function(){
             let latest_block = await web3.eth.getBlockNumber();
             console.log("Latest Block: ",latest_block);
             let responseEvent = await contract.getPastEvents("SearchAdded", { fromBlock: latest_block, toBlock: latest_block });
-            console.log("RESPONSE: ",responseEvent);
+            console.log("NEW_SEARCH: ",responseEvent);
             if (responseEvent.length !== 0) {
                 let data = new FormData();
                 data.append('curp', responseEvent[0].returnValues._curp);
@@ -38,7 +38,7 @@ class POC_oracle {
                 };
                 axios(config)
                 .then(async function (responseAxios) {
-                    console.log(JSON.stringify(responseAxios.data));
+                    console.log("IPFS_FILE_ADDED");
                     const ipfs = new ipfsClient({ host: 'ipfs.infura.io', port: 5001,protocol: 'https' });
                     const object  = await ipfs.add(JSON.stringify(responseAxios.data));
                     let cid = "";
@@ -46,7 +46,7 @@ class POC_oracle {
                         cid = item;
                         break;
                     }
-                    let encodedABI = contract.methods.newResult(responseEvent[0].returnValues._uuid, true, cid).encodeABI();
+                    let encodedABI = contract.methods.newResult(responseEvent[0].returnValues._uuid, true, cid.path).encodeABI();
                     let signedTx = await web3.eth.accounts.signTransaction(
                         {
                         data: encodedABI,
@@ -68,7 +68,7 @@ class POC_oracle {
                                 "uuid": response2[i].returnValues._uuid,
                                 "node": response2[i].returnValues._node,
                             }
-                            console.log("END_RESULT: ",endresult);
+                            console.log("RESULT_ADDED");
                         }
                     }
                 })
@@ -81,4 +81,4 @@ class POC_oracle {
 
 }
 
-module.exports = POC_oracle;
+module.exports = Oracle_searchs;
