@@ -62,21 +62,24 @@ class POC {
     getResults = async(_uuid) => {
         console.log("<getResults>");
         let response = await contract.methods.getResults(_uuid).call();
-        console.log("XX: ",response[0].cid);
-        //agregar aqui validacion de que no entre si no hay resultados
-        const ipfs = new ipfsClient({ host: 'ipfs.infura.io', port: 5001,protocol: 'https' });
-        //agregar aqui ciclo que recorra todos los resultados y ademas crear variable q guarde las distancias
-        const file = [];
-        for await (const item of ipfs.cat(response[0].cid)) {
-            console.log("GG",item);
-            file.push(item);
-            break;
+        let promedio = 0;
+        if(response.length > 0) {
+            const ipfs = new ipfsClient({ host: 'ipfs.infura.io', port: 5001,protocol: 'https' });
+            for(let i=0; i < response.length; i++) {
+                const file = [];
+                for await (const item of ipfs.cat(response[i].cid)) {
+                    file.push(item);
+                    break;
+                }
+                const raw = JSON.parse(Buffer.concat(file).toString());
+                promedio += raw.facecompare.distance;
+            }
+            promedio = promedio / response.length;
         }
-        const raw = Buffer.concat(file).toString();
-        console.log("YY: ",JSON.parse(raw));
-        // Sacar aqui el promedio.
+        console.log("Final: ",promedio);
+        const finalResponse = {"promedio":promedio};
         console.log("</getResults>");
-        return response;
+        return finalResponse;
     };
 
     isOpen = async(_uuid) => {
