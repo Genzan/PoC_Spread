@@ -66,7 +66,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -85,7 +86,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_curp\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_playground\",\"type\":\"string\"}],\"name\":\"AtestacionAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_curp\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_playground\",\"type\":\"string\"}],\"name\":\"Atestacion\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_curp\",\"type\":\"string\"}],\"name\":\"SearchByCurp\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"SearchByID\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/solidity/Demo.sol\":\"Demo\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Counters.sol\":{\"keccak256\":\"0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://59e1c62884d55b70f3ae5432b44bb3166ad71ae3acd19c57ab6ddc3c87c325ee\",\"dweb:/ipfs/QmezuXg5GK5oeA4F91EZhozBFekhq5TD966bHPH18cCqhu\"]},\"project:/contracts/solidity/Demo.sol\":{\"keccak256\":\"0x8029c05dace991358933003a4f133e2977934f0f7b9eba5c7331448aca9556b4\",\"urls\":[\"bzz-raw://e94fdeadbd4f8229c22ea38d6dd27df2537112ea05a1b46f86888ccef5dcc634\",\"dweb:/ipfs/QmSp3hrtiRbJaZ8quAV3XM3SpP5kpKcgSp5kLtUZmqNXYj\"]}},\"version\":1}",
@@ -8508,9 +8510,17 @@
     "name": "solc",
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xc4662feC7bcc47Da7c9093351867631A65Aa7894",
+      "transactionHash": "0x2380a19c8cae42f53a4bbf14e13366d31052d71de262942c4d93a2870f0fdfd6"
+    }
+  },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-06-14T20:04:18.682Z",
+  "updatedAt": "2022-08-29T21:52:26.147Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
