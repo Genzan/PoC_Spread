@@ -28,7 +28,7 @@ class Oracle_searchs {
 
                 let config = {
                 method: 'post',
-                url: 'http://110.238.81.123:8000/v1/dev_workflows/webhook/all-check-alliance',
+                url: 'http://110.238.81.123:8000/v1/dev_webhook_workflows/webhook/all-check-alliance',
                 headers: { 
                     'apikey': '8rQjNygyyhMAK5p6Ya2jBbkoIbQL9IM7', 
                     'host': '110.238.81.123', 

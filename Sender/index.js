@@ -62,6 +62,11 @@ app.get('/dev/estatus_busqueda', async (req, res) => {
   res.status(200).send(response);
 });
 
+app.post('/dev/add_file', async (req, res) => {
+  let response = await POCObj.addFile(req.body);
+  res.status(200).send(response);
+});
+
 // run the app server and tunneling service
 app.listen(SERVERPORT, () => {
   console.log(`Demo listening at http://localhost:${SERVERPORT}`)

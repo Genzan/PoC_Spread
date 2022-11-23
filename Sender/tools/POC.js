@@ -82,6 +82,19 @@ class POC {
         return finalResponse;
     };
 
+    addFile = async(cadena) => {
+        console.log("<addFile>");
+        const ipfs = new ipfsClient({ host: 'ipfs.infura.io', port: 5001,protocol: 'https' });
+        const object  = await ipfs.add(JSON.stringify(cadena));
+        let cid = "";
+        for await (const item of object) {
+            cid = item;
+            break;
+        }
+        console.log("</addFile>");
+        return cid;
+    };
+
     isOpen = async(_uuid) => {
         console.log("<isOpen>");
         let response = await contract.methods.isOpen(_uuid).call();
